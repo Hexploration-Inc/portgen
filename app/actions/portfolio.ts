@@ -14,42 +14,44 @@ function slugify(text: string): string {
     .replace(/\-\-+/g, "-"); // Replace multiple - with single -
 }
 
-export async function createPortfolio(formData: FormData) {
+export async function createPortfolio(
+  prevState: any,
+  formData: FormData
+): Promise<{ error?: string; success?: boolean; message?: string }> {
   const session = await auth();
   if (!session?.user?.id) {
-    throw new Error("You must be logged in to create a portfolio");
+    return { error: "You must be logged in to create a portfolio." };
   }
 
   const name = formData.get("name") as string;
   if (!name || name.trim().length === 0) {
-    throw new Error("Portfolio name is required");
+    return { error: "Portfolio name is required." };
   }
 
   const isPublic = formData.get("isPublic") === "on";
+  const slug = slugify(name);
 
-  const baseSlug = slugify(name);
-  let finalSlug = baseSlug;
-  let counter = 1;
+  // Check if a portfolio with this slug already exists for the current user
+  const existingPortfolio = await prisma.portfolio.findUnique({
+    where: { userId_slug: { userId: session.user.id, slug: slug } },
+  });
 
-  // Loop to find a unique slug for the current user
-  while (
-    await prisma.portfolio.findUnique({
-      where: { userId_slug: { userId: session.user.id, slug: finalSlug } },
-    })
-  ) {
-    finalSlug = `${baseSlug}-${counter}`;
-    counter++;
+  if (existingPortfolio) {
+    return {
+      error:
+        "You already have a portfolio with this name. Please choose another.",
+    };
   }
 
   await prisma.portfolio.create({
     data: {
       name: name.trim(),
-      slug: finalSlug,
+      slug: slug,
       isPublic: isPublic,
       userId: session.user.id,
     },
   });
 
-  // Revalidate the dashboard path to show the new portfolio immediately
   revalidatePath("/dashboard");
+  return { success: true, message: "Portfolio created successfully!" };
 }

@@ -1,13 +1,9 @@
 import { auth } from "@/auth";
 import prisma from "@/lib/db";
 import { redirect } from "next/navigation";
-import { createPortfolio } from "@/app/actions/portfolio";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
 import { SetUsernameForm } from "@/components/auth/set-username-form";
-import { Switch } from "@/components/ui/switch";
 import { PortfolioItem } from "@/components/dashboard/portfolio-item";
+import { CreatePortfolioForm } from "@/components/dashboard/create-portfolio-form";
 
 export default async function DashboardPage() {
   const session = await auth();
@@ -46,25 +42,7 @@ export default async function DashboardPage() {
 
       <section>
         <h2 className="text-2xl font-semibold mb-6">Create a New Portfolio</h2>
-        <form action={createPortfolio} className="max-w-md flex flex-col gap-4">
-          <div className="grid w-full items-center gap-1.5">
-            <Label htmlFor="name">Portfolio Name</Label>
-            <Input
-              type="text"
-              id="name"
-              name="name"
-              placeholder="e.g., My Software Projects"
-              required
-            />
-          </div>
-          <div className="flex items-center space-x-2">
-            <Switch id="isPublic" name="isPublic" />
-            <Label htmlFor="isPublic">Make portfolio public</Label>
-          </div>
-          <Button type="submit" className="self-start">
-            Create
-          </Button>
-        </form>
+        <CreatePortfolioForm />
       </section>
 
       <section className="mt-12">
