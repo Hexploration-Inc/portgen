@@ -4,7 +4,7 @@
 
 ## Overview
 
-PortGen is an open-source web application designed to help professionals showcase their work with zero hassle. It's an intelligent system that transforms your content—be it a resume, a folder of images, or project notes—into a stunning, professional portfolio website.
+PortGen is an open-source web application designed to help professionals showcase their work with zero hassle. It's an intelligent system that transforms your resume into a stunning, professional portfolio website.
 
 Our goal is to create the most seamless experience for generating a professional online presence, giving users full control over their narrative without needing to write a single line of code.
 
@@ -37,63 +37,44 @@ The world has great tools for showcasing work, like social platforms (Behance, D
 
 ---
 
-## The Flawless Portfolio: Launch Plan
+## How It Works: The 60-Second Portfolio
 
-For our initial launch, we will focus on a world-class experience for three key personas.
+Our initial launch is focused on one flawless experience: turning a professional's resume into a beautiful, functional portfolio.
 
-### 1. The Software Developer
-
-**Goal:** Showcase technical expertise, project impact, and professional experience.
-
-- **Initial Action**: Upload a resume.
-- **Instant Result**: A fully populated portfolio with sections for experience, projects (with source code links and live links), skills and education.
-- **Launch Theme: "Monaco"**: A clean, text-focused, professional theme.
-
-### 2. The Photographer
-
-**Goal:** Create an immersive, unobtrusive visual experience where the images are the hero.
-
-- **Initial Action**: Upload a folder of photos.
-- **Instant Result**: A beautiful, minimal gallery of your work with a fast, full-screen lightbox.
-- **Launch Theme: "Kyoto"**: An image-first, minimalist theme designed to make photos pop.
-
-### 3. The Designer (UI/UX, Product)
-
-**Goal:** Blend visual polish with compelling storytelling to explain the "why" behind the work.
-
-- **Initial Action**: Upload a collection of your best design shots (JPEGs, PNGs).
-- **Instant Result**: A `VisualShowcase`—a stunning, grid-based portfolio of your work. This gives you a professional presence in seconds.
-- **The Power-Up**: For any project in your showcase, you can choose to **"Add the Story."** This converts it into a rich `CaseStudy` block, allowing you to add detailed sections about your process, from problem to solution. This is how you show off your thinking, not just your pixels.
-- **Launch Theme: "Bauhaus"**: A theme with a strong grid system and bold typography, perfect for balancing visuals and text in both simple showcases and detailed case studies.
+1.  **Upload Your Resume**: The journey starts with a simple drag-and-drop. You provide your resume in PDF format.
+2.  **AI-Powered Analysis**: Our system instantly parses the document, intelligently identifying key sections like your work experience, projects, skills, and education.
+3.  **Instant Portfolio**: A complete, multi-section portfolio is generated and populated with your content.
+4.  **Choose Your Style**: You can cycle through a library of beautiful, opinionated themes to find the one that best tells your story. Our launch theme is **"Monaco"**—a clean, text-focused, professional theme perfect for developers and other text-heavy roles.
+5.  **Edit & Deploy**: Tweak any detail in our simple editor and your portfolio is ready to be shared with the world.
 
 ---
 
 ## Features Roadmap 🚀
 
-### Phase 1: Core Engine & Persona Launch
+### Phase 1: The Resume Engine
 
 - [ ] **User Authentication**:
-  - [ ] Secure user accounts using NextAuth.js (Email/Password & Google OAuth).
-- [ ] **Database & Content Block Scaffolding**:
+  - [x] Secure user accounts using NextAuth.js with Google & GitHub.
+- [ ] **Database & Content Modeling**:
   - [ ] Set up PostgreSQL with Prisma.
-  - [ ] Define schemas for `User`, `Portfolio`, and all essential `Content Blocks` for our three launch personas.
-- [ ] **AI Resume Analysis (for Developers)**:
+  - [ ] Define schemas for `User`, `Portfolio`, and a flexible `ContentBlock` model to store parsed resume data (e.g., experience, projects, skills).
+- [ ] **AI Resume Analysis**:
   - [ ] Backend endpoint to receive a resume (PDF).
-  - [ ] AI-powered service to parse the resume into our block structure.
-- [ ] **Portfolio Creation Flow**:
-  - [ ] A simple UI to choose a portfolio type (e.g., "Developer", "Designer").
-  - [ ] For non-resume flows, a simple interface to start adding content blocks (e.g., an image uploader for photographers).
-- [ ] **Basic Dashboard & Editor**:
-  - [ ] A protected page listing a user's portfolios.
-  - [ ] An editor to add, remove, reorder, and edit the content within the blocks of a portfolio.
-- [ ] **Theme Engine & Public Viewing**:
-  - [ ] Build the three launch themes: "Monaco", "Kyoto", and "Bauhaus".
-  - [ ] Render portfolios on public URLs (e.g., `portgen.dev/username/portfolio-slug`).
+  - [ ] AI-powered service to parse the resume into our `ContentBlock` structure.
+- [ ] **Core Portfolio Flow**:
+  - [ ] A simple UI to upload a resume.
+  - [ ] Automatically create a new portfolio from the parsed content.
+- [ ] **Portfolio Editor & Theming**:
+  - [ ] A protected dashboard listing a user's portfolios.
+  - [ ] An editor to view/edit the content within the blocks of a portfolio.
+  - [ ] A theme switcher to apply different templates (starting with "Monaco").
+- [ ] **Public Portfolio Rendering**:
+  - [ ] Render portfolios on public URLs (`portgen.dev/username/portfolio-slug`) based on the selected theme and content.
 
 ### Phase 2: Enhancements & Premium Features
 
+- [ ] **More Themes & Customization** (e.g., color palettes, fonts)
 - [ ] **LinkedIn Profile Import**
-- [ ] **More Themes & Customization** (e.g., color palettes)
 - [ ] **Custom Domains (Premium)**
 - [ ] **Analytics (Premium)**
 - [ ] **Contact Forms (Premium)**
