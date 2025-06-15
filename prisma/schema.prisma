@@ -46,6 +46,7 @@ model User {
   id            String      @id @default(cuid())
   name          String?
   email         String?     @unique
+  username      String?     @unique
   emailVerified DateTime?
   image         String?
   accounts      Account[]
@@ -62,9 +63,12 @@ model VerificationToken {
 }
 
 model Portfolio {
-  id     String @id @default(cuid())
-  name   String
-  slug   String @unique
-  userId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id       String  @id @default(cuid())
+  name     String
+  slug     String
+  isPublic Boolean @default(false)
+  userId   String
+  user     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, slug])
 }
